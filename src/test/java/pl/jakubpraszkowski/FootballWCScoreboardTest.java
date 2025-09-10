@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FootballWCScoreboardTest {
     private FootballWCScoreboard board;
@@ -36,4 +37,12 @@ public class FootballWCScoreboardTest {
         assertEquals(1, match.getHomeScore());
         assertEquals(2, match.getAwayScore());
     }
+
+    @Test
+    void finishGameShouldRemoveMatch() {
+        board.startGame("Spain", "Brazil");
+        board.finishGame("Spain", "Brazil");
+        assertTrue(board.getSummary().isEmpty());
+    }
+
 }
