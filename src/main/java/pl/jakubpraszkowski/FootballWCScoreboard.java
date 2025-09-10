@@ -15,4 +15,15 @@ public class FootballWCScoreboard {
     public List<Match> getSummary() {
         return new ArrayList<>(matches);
     }
+
+    public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
+        findMatch(homeTeam, awayTeam).setScore(homeScore, awayScore);
+    }
+
+    private Match findMatch(String homeTeam, String awayTeam) {
+        return matches.stream()
+                .filter(m -> m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam))
+                .findFirst()
+                .orElseThrow(() -> new MatchNotFoundException(homeTeam, awayTeam));
+    }
 }
