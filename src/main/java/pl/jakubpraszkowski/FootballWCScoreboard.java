@@ -20,6 +20,11 @@ public class FootballWCScoreboard {
         findMatch(homeTeam, awayTeam).setScore(homeScore, awayScore);
     }
 
+    public void finishGame(String homeTeam, String awayTeam) {
+        Match match = findMatch(homeTeam, awayTeam);
+        matches.remove(match);
+    }
+
     private Match findMatch(String homeTeam, String awayTeam) {
         return matches.stream()
                 .filter(m -> m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam))
