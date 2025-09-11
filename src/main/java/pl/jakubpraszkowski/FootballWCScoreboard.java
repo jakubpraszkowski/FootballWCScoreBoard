@@ -2,6 +2,7 @@ package pl.jakubpraszkowski;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FootballWCScoreboard {
     private final List<Match> matches = new ArrayList<>();
@@ -13,7 +14,17 @@ public class FootballWCScoreboard {
     }
 
     public List<Match> getSummary() {
-        return new ArrayList<>(matches);
+        return matches.stream()
+                .sorted((m1, m2) -> {
+                    int total1 = m1.getHomeScore() + m1.getAwayScore();
+                    int total2 = m2.getHomeScore() + m2.getAwayScore();
+
+                    if (total1 != total2) {
+                        return Integer.compare(total2, total1);
+                    }
+                    return Integer.compare(matches.indexOf(m2), matches.indexOf(m1));
+                })
+                .collect(Collectors.toList());
     }
 
     public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
