@@ -71,4 +71,10 @@ public class FootballWCScoreboardTest {
                 () -> assertEquals("Germany 2 - France 2", summary.get(4).toString())
         );
     }
+
+    @Test
+    void cannotStartGameWithSameTeams() {
+        assertThrows(IllegalArgumentException.class,
+                () -> board.startGame("Spain", "Spain"));
+    }
 }
