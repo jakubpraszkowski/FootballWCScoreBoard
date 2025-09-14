@@ -8,6 +8,10 @@ public class FootballWCScoreboard {
     private final List<Match> matches = new ArrayList<>();
 
     public Match startGame(String homeTeam, String awayTeam) {
+        if (homeTeam.equals(awayTeam)) {
+            throw new SameTeamException(homeTeam, awayTeam);
+        }
+
         Match match = new Match(homeTeam, awayTeam);
         matches.add(match);
         return match;

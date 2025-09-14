@@ -74,7 +74,7 @@ public class FootballWCScoreboardTest {
 
     @Test
     void cannotStartGameWithSameTeams() {
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(SameTeamException.class,
                 () -> board.startGame("Spain", "Spain"));
     }
 }
