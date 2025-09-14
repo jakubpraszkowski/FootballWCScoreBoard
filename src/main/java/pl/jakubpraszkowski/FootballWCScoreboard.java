@@ -1,6 +1,7 @@
 package pl.jakubpraszkowski;
 
 import pl.jakubpraszkowski.exception.MatchNotFoundException;
+import pl.jakubpraszkowski.exception.NegativeScoreException;
 import pl.jakubpraszkowski.exception.SameTeamException;
 
 import java.util.ArrayList;
@@ -35,6 +36,10 @@ public class FootballWCScoreboard {
     }
 
     public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
+        if (homeScore < 0 || awayScore < 0) {
+            throw new NegativeScoreException(homeScore, awayScore);
+        }
+
         findMatch(homeTeam, awayTeam).setScore(homeScore, awayScore);
     }
 
