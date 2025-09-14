@@ -48,6 +48,28 @@ public class FootballWCScoreboard {
         matches.remove(match);
     }
 
+    public String displayScoreboard() {
+        if (matches.isEmpty()) {
+            return "No matches in table yet!";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%-15s | %-15s | %-10s | %-10s | %-5s%n",
+                "Home", "Away", "HomeScore", "AwayScore", "Total"));
+        sb.append("-------------------------------------------------------------\n");
+
+        for (var m : getSummary()) {
+            sb.append(String.format("%-15s | %-15s | %-10d | %-10d | %-5d%n",
+                    m.getHomeTeam(),
+                    m.getAwayTeam(),
+                    m.getHomeScore(),
+                    m.getAwayScore(),
+                    m.getHomeScore() + m.getAwayScore()));
+        }
+
+        return sb.toString();
+    }
+
     private Match findMatch(String homeTeam, String awayTeam) {
         return matches.stream()
                 .filter(m -> m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam))
