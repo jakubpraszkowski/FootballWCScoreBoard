@@ -95,4 +95,20 @@ public class FootballWCScoreboardTest {
         assertThrows(NegativeScoreException.class,
                 () -> board.updateScore("A", "B", 0, -1));
     }
+
+    @Test
+    void displayScoreboardShouldReturnFormattedTable() {
+        board.startGame("Mexico", "Canada");
+        board.updateScore("Mexico", "Canada", 0, 5);
+
+        board.startGame("Spain", "Brazil");
+        board.updateScore("Spain", "Brazil", 10, 2);
+
+        String output = board.displayScoreboard();
+
+        String[] expectedStrings = {"Mexico", "Canada", "Spain", "Brazil", "HomeScore", "AwayScore", "Total"};
+        for (var s : expectedStrings) {
+            assertTrue(output.contains(s), "Output should contain: " + s);
+        }
+    }
 }
