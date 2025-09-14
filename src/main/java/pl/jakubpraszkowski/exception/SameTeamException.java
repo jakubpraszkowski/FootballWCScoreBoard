@@ -1,4 +1,4 @@
-package pl.jakubpraszkowski;
+package pl.jakubpraszkowski.exception;
 
 public class SameTeamException extends RuntimeException {
     public SameTeamException(String message) {

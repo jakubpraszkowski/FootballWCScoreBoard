@@ -2,6 +2,9 @@ package pl.jakubpraszkowski;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.jakubpraszkowski.exception.MatchNotFoundException;
+import pl.jakubpraszkowski.exception.NegativeScoreException;
+import pl.jakubpraszkowski.exception.SameTeamException;
 
 import java.util.List;
 
@@ -73,8 +76,23 @@ public class FootballWCScoreboardTest {
     }
 
     @Test
-    void cannotStartGameWithSameTeams() {
+    void cannotStartGameWithSameTeamsTest() {
         assertThrows(SameTeamException.class,
                 () -> board.startGame("Spain", "Spain"));
+    }
+
+    @Test
+    void updateNonExistingGameThrowsTest() {
+        assertThrows(MatchNotFoundException.class,
+                () -> board.updateScore("Non", "Existent", 1, 1));
+    }
+
+    @Test
+    void negativeScoresAreRejectedTest() {
+        board.startGame("A", "B");
+        assertThrows(NegativeScoreException.class,
+                () -> board.updateScore("A", "B", -1, 0));
+        assertThrows(NegativeScoreException.class,
+                () -> board.updateScore("A", "B", 0, -1));
     }
 }

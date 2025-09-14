@@ -1,4 +1,4 @@
-package pl.jakubpraszkowski;
+package pl.jakubpraszkowski.exception;
 
 public class MatchNotFoundException extends RuntimeException {
     public MatchNotFoundException(String message) {
